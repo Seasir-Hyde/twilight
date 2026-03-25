@@ -1,7 +1,7 @@
 # 后台系统配置
 backend:
     name: github
-    repo: Seasir-Hyde/twilight
+    repo: Seasir-Hyde/Twilight
     branch: main
     site_domain: twilight.seasir.top
     base_url: https://twilight.seasir.top
