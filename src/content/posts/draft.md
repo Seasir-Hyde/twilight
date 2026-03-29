@@ -1,12 +1,11 @@
 ---
-title: Draft Example
+title: 测试
 published: 2021-12-02
-tags: [Markdown]
-category: Examples
+updated: 2026-03-29
+tags:
+  - Markdown
 draft: true
 ---
-
-
 # This Article is a Draft
 
 This article is currently in a draft state and is not published. Therefore, it will not be visible to the general audience. The content is still a work in progress and may require further editing and review.
@@ -21,3 +20,6 @@ tags: [Markdown]
 category: Examples
 draft: false
 ---
+```
+
+&nbsp;
