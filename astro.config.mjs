@@ -8,7 +8,7 @@ import sitemap from "@astrojs/sitemap";
 import cloudflarePages from "@astrojs/cloudflare";
 import edgeone from "@edgeone/astro";
 import vercel from "@astrojs/vercel";
-import decapCmsOauth from "astro-decap-cms-oauth";
+import decapCmsOauth from "decap-cms-oauth-astro";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -52,8 +52,9 @@ export default defineConfig({
     adapter: adapter,
     integrations: [
         decapCmsOauth({
+            configPath: "./.decap.yml", // Path to the Decap CMS configuration file
             decapCMSVersion: "3.9.0",
-            oauthDisabled: false, // Disable it to use oauth, requires .env configuration
+            enable: false, // Set to true to use oauth (Requires .env configuration)
         }),
         swup({
             theme: false,
@@ -201,9 +202,14 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()],
         build: {
+            cssCodeSplit: true,
+            cssMinify: "esbuild",
+            minify: "esbuild",
+            esbuildOptions: {
+                drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : [],
+            },
             rollupOptions: {
                 onwarn(warning, warn) {
-                    // temporarily suppress this warning
                     if (
                         warning.message.includes("is dynamically imported by") &&
                         warning.message.includes("but also statically imported by")
@@ -215,7 +221,7 @@ export default defineConfig({
             },
         },
     },
-    build: {
-        inlineStylesheets: "always",
-    },
+    //build: {
+    //    inlineStylesheets: "always",
+    //},
 });
